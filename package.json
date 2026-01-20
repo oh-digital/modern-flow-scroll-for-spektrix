@@ -1,0 +1,31 @@
+{
+  "name": "modern-flow-scroll-for-spektrix",
+  "version": "1.0.0",
+  "description": "A modern, unofficial alternative to Spektrix's Flow Scroll script. Scrolls the host page to the relevant part of the Spektrix iframe as you navigate the Express Checkout.",
+  "license": "MPL-2.0",
+  "type": "module",
+  "module": "./dist/index.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.0.0"
+  }
+}
