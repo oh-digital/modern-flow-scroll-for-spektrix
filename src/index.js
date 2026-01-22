@@ -17,6 +17,8 @@
  * @property {"auto"|"smooth"} [scrollBehavior="auto"] Scroll behavior (e.g. "smooth".
  * @property {"iframe"|"page"} [navigateScrollTarget="page"] After navigation, scroll to the top
  *   of the `iframe` (default) or top of the parent `page`.
+ * @property {boolean} [alwaysScroll=false] Always scroll the viewport on navigation, even if the
+ *   user is already further up the page.
  * @property {string[]} [expressCheckoutAllowlist=[]] When in the express checkout, perform a normal
  *   navigation scroll if the path ends with one of these suffixes.
  *
@@ -34,6 +36,7 @@ const defaultOptions = {
   // Scroll behavior settings
   scrollBehavior: "auto",
   navigateScrollTarget: "page",
+  alwaysScroll: false,
   expressCheckoutAllowlist: ['startcheckoutlogin', 'orderconfirmation'],
 
   // Misc
@@ -134,7 +137,7 @@ const computeScrollTarget = (base, navHeight, extraOffset = 0) => {
  * Scroll the window, but only if the user is further down.
  */
 const scrollTo = (options, targetTop, force=false) => {
-  if (force || targetTop < window.scrollY) {
+  if (force || options.alwaysScroll || targetTop < window.scrollY) {
     window.scrollTo({ top: targetTop, left: 0, behavior: options.scrollBehavior });
   } else {
     debugLog(options, "Scrolling cancelled - the user is already higher up the page.");
