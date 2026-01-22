@@ -4,14 +4,14 @@ A modern, unofficial alternative to [Spektrix's Flow Scroll script](https://inte
 
 Scrolls the parent page to the relevant part of the Spektrix iframe as you navigate the Express Checkout.
 
-It can also cleanly replace the ["onload" approach](https://integrate.spektrix.com/docs/resizingiframes#scroll) often used for jumping to the top of the other, classic iframes (see the configuration section).
+It can also cleanly replace the ["onload" approach](https://integrate.spektrix.com/docs/resizingiframes#scroll) often used for jumping to the top of the other, classic iframes (see the configuration section below).
 
 ## Features
 
 This package offers the following advantages:
 
-- Works with **Spektrix custom domains** out of the box
-- Works with the **express checkout** ("flow scroll"), the **classic checkout** and [the other iframe pages](https://integrate.spektrix.com/docs/standardbookingflow) too.
+- Works with **Spektrix custom domains** out of the box.
+- Works with the **express checkout** ("flow scroll"), the **classic checkout** and [the other iframe pages](https://integrate.spektrix.com/docs/standardbookingflow) too, without a messy mix of scripts and onload attributes.
 - Can accommodate a **fixed-position navigation bar** (or other elements that overlay the viewport) with one-line configuration.
 
 ## Prerequisites
@@ -31,7 +31,7 @@ import ModernFlowScroll from "modern-flow-scroll-for-spektrix";
 ModernFlowScroll.init({
   domain: "tickets.example.org",     // Your Spektrix custom domain
   navSelector: "#navigation-header", // Optional position:fixed nav element
-  debug: false,
+  debug: false,                      // Remove this once you're happy
   scrollBehavior: "auto"             // e.g. "smooth"
 });
 ```
@@ -49,6 +49,7 @@ Then add the following to your page:
 <script>
   ModernFlowScroll.init({
     domain: "tickets.example.org", // Your Spektrix custom domain
+    // ...
   });
 </script>
 ```
@@ -114,6 +115,7 @@ All configuration parameters are optional. However, the script won't work if you
 | navHeight | `null` | Fixed nav height (pixels) or a callback returning an int. Takes priority over navSelector. |
 | scrollBehavior | `false` | Override scroll behavior, e.g. `"smooth"`. |
 | navigateScrollTarget | `"page"` | Whether to scroll to the top of the `"iframe"` or the top of the parent `"page"` after navigation. |
+| alwaysScroll | `false` | Always scroll the viewport on navigation, even if the user is already further up the page. Only useful when `navigateScrollTarget` is `"iframe"` and you always want forced scrolling. Not recommended.
 | debug | `false` | Set to true if you want useful debug info logged to the console. |
 
 ## License

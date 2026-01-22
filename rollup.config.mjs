@@ -1,5 +1,3 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
 import terser from "@rollup/plugin-terser";
 
 const input = "src/index.js";
@@ -12,8 +10,7 @@ export default [
       file: "dist/index.esm.js",
       format: "esm",
       sourcemap: true,
-    },
-    plugins: [resolve(), commonjs()],
+    }
   },
 
   // IIFE build (classic <script> tag global)
@@ -25,8 +22,7 @@ export default [
       name: "ModernFlowScroll",
       sourcemap: true,
       exports: "named",
-    },
-    plugins: [resolve(), commonjs()],
+    }
   },
 
   // IIFE minified
@@ -39,6 +35,6 @@ export default [
       sourcemap: true,
       exports: "named",
     },
-    plugins: [resolve(), commonjs(), terser()],
+    plugins: [terser()],
   },
 ];
